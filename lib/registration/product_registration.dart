@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ProductDetail extends StatelessWidget {
+class ProductRegistration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return (Text('ProductDetail'));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('ProductRegistration'),
+      ),
+      body: Column(
+        children: [Text('ProductRegistration')],
+      ),
+    );
   }
 }
