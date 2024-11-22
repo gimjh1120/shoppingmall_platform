@@ -18,12 +18,20 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   final TextEditingController _descriptionController = TextEditingController();
 
   Future<void> _pickImages() async {
-    final List<XFile> selectedImages = await _picker.pickMultiImage();
+    final List<XFile> selectedImages = await _picker.pickMultiImage(
+      maxWidth: 1000,
+      maxHeight: 1000,
+      imageQuality: 80,
+      limit: 10,
+    );
+    
     if (selectedImages.isNotEmpty) {
       setState(() {
-        _images.addAll(selectedImages);
-        if (_images.length > 10) {
-          _images.removeRange(10, _images.length);
+        for (var image in selectedImages) {
+          if (!_images.any((element) => element.path == image.path)) {
+            _images.add(image);
+            if (_images.length == 10) break;
+          }
         }
       });
     }
