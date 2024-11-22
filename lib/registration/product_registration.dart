@@ -12,6 +12,10 @@ class ProductRegistration extends StatefulWidget {
 class _ProductRegistrationState extends State<ProductRegistration> {
   final ImagePicker _picker = ImagePicker();
   final List<XFile> _images = [];
+  
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   Future<void> _pickImages() async {
     final List<XFile> selectedImages = await _picker.pickMultiImage();
@@ -20,6 +24,26 @@ class _ProductRegistrationState extends State<ProductRegistration> {
         _images.addAll(selectedImages);
       });
     }
+  }
+
+  void _handleSubmit() {
+    final String name = _nameController.text;
+    final String price = _priceController.text;
+    final String description = _descriptionController.text;
+
+    print('상품 이름: $name');
+    print('가격: $price');
+    print('상품 설명: $description');
+    print('이미지 개수: ${_images.length}');
+  }
+
+  @override
+  void dispose() {
+    // 컨트롤러들 해제
+    _nameController.dispose();
+    _priceController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
   }
 
   @override
@@ -128,6 +152,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
             ),
             const SizedBox(height: 8),
             TextField(
+              controller: _nameController,
               decoration: InputDecoration(
                 hintText: '상품 이름을 입력해주세요',
                 border: OutlineInputBorder(
@@ -145,6 +170,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
             ),
             const SizedBox(height: 8),
             TextField(
+              controller: _priceController,
               decoration: InputDecoration(
                 hintText: '가격을 입력해주세요',
                 border: OutlineInputBorder(
@@ -163,6 +189,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
             ),
             const SizedBox(height: 8),
             TextField(
+              controller: _descriptionController,
               maxLines: 6,
               decoration: InputDecoration(
                 hintText: '상세하게 상품을 설명해주세요',
@@ -178,7 +205,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: _handleSubmit,
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFFF6E1D),
               padding: const EdgeInsets.symmetric(vertical: 10),
