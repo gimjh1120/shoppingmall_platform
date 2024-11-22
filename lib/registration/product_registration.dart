@@ -22,6 +22,9 @@ class _ProductRegistrationState extends State<ProductRegistration> {
     if (selectedImages.isNotEmpty) {
       setState(() {
         _images.addAll(selectedImages);
+        if (_images.length > 10) {
+          _images.removeRange(10, _images.length);
+        }
       });
     }
   }
@@ -39,7 +42,6 @@ class _ProductRegistrationState extends State<ProductRegistration> {
 
   @override
   void dispose() {
-    // 컨트롤러들 해제
     _nameController.dispose();
     _priceController.dispose();
     _descriptionController.dispose();
@@ -67,9 +69,9 @@ class _ProductRegistrationState extends State<ProductRegistration> {
               height: 200,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: _images.length + 1,
+                itemCount: _images.length < 10 ? _images.length + 1 : _images.length,
                 itemBuilder: (context, index) {
-                  if (index == _images.length) {
+                  if (index == _images.length && _images.length < 10) {
                     return GestureDetector(
                       onTap: _pickImages,
                       child: Container(
@@ -79,7 +81,21 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                           color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Icon(Icons.add_photo_alternate_outlined),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.add_photo_alternate_outlined, size: 40),
+                            const SizedBox(height: 8),
+                            Text(
+                              '사진은 최대 10장까지\n업로드 할 수 있습니다',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }
