@@ -49,10 +49,10 @@ class _ProductDetailState extends State<ProductDetail> {
           // 아래 콘텐츠 영역
           SliverToBoxAdapter(
             child: Container(
-              padding: EdgeInsets.all(20),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
+                  vertical: 20,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,6 +84,12 @@ class _ProductDetailState extends State<ProductDetail> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 100,
+        decoration: BoxDecoration(
+            border: Border(
+                top: BorderSide(
+          color: Colors.black87,
+          width: 0.1,
+        ))),
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
@@ -106,7 +112,7 @@ class _ProductDetailState extends State<ProductDetail> {
                 width: 24,
               ),
               Text(
-                '$productPrice원',
+                '$productPrice 원',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Spacer(),
