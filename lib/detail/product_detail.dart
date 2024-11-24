@@ -7,9 +7,9 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
-  final ScrollController _scrollController = ScrollController();
-  final PageController _pageController = PageController(); // PageView 컨트롤러 추가
-  int _currentPage = 0; // 현재 슬라이더 페이지를 저장하는 변수
+  final ScrollController scrollController = ScrollController();
+  final PageController pageController = PageController(); // PageView 컨트롤러 추가
+  int currentPage = 0; // 현재 슬라이더 페이지를 저장하는 변수
 
   List<String> images = [
     'https://via.placeholder.com/600x400', // 이미지 URL 1
@@ -18,14 +18,14 @@ class _ProductDetailState extends State<ProductDetail> {
   ];
   String title = '제목';
   String productDetail =
-      '상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명';
+      '상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명';
   int productPrice = 20000;
   bool like = false; // 좋아요 상태를 저장하는 변수
 
   @override
   void dispose() {
-    _scrollController.dispose(); // ScrollController 해제
-    _pageController.dispose(); // PageController 해제
+    scrollController.dispose(); // ScrollController 해제
+    pageController.dispose(); // PageController 해제
     super.dispose();
   }
 
@@ -33,11 +33,12 @@ class _ProductDetailState extends State<ProductDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        controller: _scrollController, // 스크롤 가능한 영역을 위한 컨트롤러
+        controller: scrollController, // 스크롤 가능한 영역을 위한 컨트롤러
         slivers: [
           SliverAppBar(
             expandedHeight: 300, // AppBar의 확장 높이 설정
             pinned: true, // 상단바를 고정
+            //이미지 및 인디케이터 영역
             flexibleSpace: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
                 double appBarHeight = constraints.biggest.height;
@@ -46,13 +47,14 @@ class _ProductDetailState extends State<ProductDetail> {
                 return Stack(
                   children: [
                     FlexibleSpaceBar(
-                      background: _buildImageSlider(),
+                      background: _buildImageSlider(), //이미지
                     ),
-                    if (isVisiual)
+                    if (isVisiual) //현재 앱바 높이가 150보다 클때 인디케이터 노출
                       Positioned(
                         bottom: 10,
                         left: 0,
                         right: 0,
+                        //인디케이터
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
@@ -63,7 +65,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               width: 8,
                               height: 8,
                               decoration: BoxDecoration(
-                                  color: _currentPage == index
+                                  color: currentPage == index
                                       ? Colors.white
                                       : Colors.white.withOpacity(0.5),
                                   borderRadius: BorderRadius.circular(4)),
@@ -189,11 +191,11 @@ class _ProductDetailState extends State<ProductDetail> {
   // 이미지 슬라이더 빌드
   Widget _buildImageSlider() {
     return PageView.builder(
-      controller: _pageController, // 페이지를 제어하기 위한 컨트롤러
+      controller: pageController, // 페이지를 제어하기 위한 컨트롤러
       itemCount: images.length, // 이미지 개수
       onPageChanged: (index) {
         setState(() {
-          _currentPage = index; // 현재 페이지 업데이트
+          currentPage = index; // 현재 페이지 업데이트
         });
       },
       itemBuilder: (context, index) {
