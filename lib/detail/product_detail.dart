@@ -8,21 +8,24 @@ class ProductDetail extends StatefulWidget {
 
 class _ProductDetailState extends State<ProductDetail> {
   final ScrollController _scrollController = ScrollController();
+  final PageController _pageController = PageController(); // PageView 컨트롤러 추가
+  int _currentPage = 0; // 현재 슬라이더 페이지를 저장하는 변수
 
-  final List<String> images = [
+  List<String> images = [
     'https://via.placeholder.com/600x400', // 이미지 URL 1
     'https://via.placeholder.com/600x400/ff0000', // 이미지 URL 2
     'https://via.placeholder.com/600x400/00ff00', // 이미지 URL 3
   ];
   String title = '제목';
   String productDetail =
-      '상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명';
+      '상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명상품 상세 설명';
   int productPrice = 20000;
-  bool like = false;
+  bool like = false; // 좋아요 상태를 저장하는 변수
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _scrollController.dispose(); // ScrollController 해제
+    _pageController.dispose(); // PageController 해제
     super.dispose();
   }
 
@@ -30,23 +33,49 @@ class _ProductDetailState extends State<ProductDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        controller: _scrollController, // ScrollController 추가
+        controller: _scrollController, // 스크롤 가능한 영역을 위한 컨트롤러
         slivers: [
-          // SliverAppBar
           SliverAppBar(
-            expandedHeight: 300, // 초기 확장 높이
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: _buildImageSlider(), // 슬라이드 추가
-            ),
-            leading: IconButton(
-              icon: Icon(CupertinoIcons.back, color: Colors.black),
-              onPressed: () {
-                Navigator.pop(context);
+            expandedHeight: 300, // AppBar의 확장 높이 설정
+            pinned: true, // 상단바를 고정
+            flexibleSpace: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                double appBarHeight = constraints.biggest.height;
+                bool isVisiual = appBarHeight > 150;
+
+                return Stack(
+                  children: [
+                    FlexibleSpaceBar(
+                      background: _buildImageSlider(),
+                    ),
+                    if (isVisiual)
+                      Positioned(
+                        bottom: 10,
+                        left: 0,
+                        right: 0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            images.length,
+                            (index) => AnimatedContainer(
+                              duration: Duration(milliseconds: 300),
+                              margin: EdgeInsets.symmetric(horizontal: 4),
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                  color: _currentPage == index
+                                      ? Colors.white
+                                      : Colors.white.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(4)),
+                            ),
+                          ),
+                        ),
+                      )
+                  ],
+                );
               },
             ),
           ),
-          // 아래 콘텐츠 영역
           SliverToBoxAdapter(
             child: Container(
               child: Padding(
@@ -57,19 +86,23 @@ class _ProductDetailState extends State<ProductDetail> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // 상품 제목
                     Text(
                       title,
                       style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
                     ),
                     SizedBox(height: 10),
+                    // "상품 설명" 제목
                     Text(
                       '상품 설명',
                       style: TextStyle(fontSize: 18, color: Colors.grey[700]),
                     ),
                     SizedBox(height: 5),
+                    // 상세 설명 텍스트
                     Text(
                       productDetail,
                       style: TextStyle(fontSize: 16, color: Colors.black87),
@@ -85,52 +118,57 @@ class _ProductDetailState extends State<ProductDetail> {
         width: double.infinity,
         height: 100,
         decoration: BoxDecoration(
-            border: Border(
-                top: BorderSide(
-          color: Colors.black87,
-          width: 0.1,
-        ))),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
+          border: Border(
+            top: BorderSide(
+              color: Colors.black87, // 상단 테두리 색상
+              width: 0.1, // 상단 테두리 두께
+            ),
           ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
+              // 좋아요 아이콘
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    like = !like;
+                    like = !like; // 좋아요 상태 토글
                   });
                 },
                 child: Icon(
-                  like ? Icons.favorite : Icons.favorite_border,
+                  like
+                      ? Icons.favorite
+                      : Icons.favorite_border, // 좋아요 상태에 따라 아이콘 변경
                   size: 32,
-                  color: Color(0xFFFF6E1D),
+                  color: Color(0xFFFF6E1D), // 좋아요 아이콘 색상
                 ),
               ),
-              SizedBox(
-                width: 24,
-              ),
+              SizedBox(width: 24),
+              // 상품 가격
               Text(
                 '$productPrice 원',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Spacer(),
+              // 주문하기 버튼
               ElevatedButton(
                 onPressed: () {},
                 child: Text(
                   '주문하기',
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  backgroundColor: Color(0xFFFF6E1D),
+                    borderRadius: BorderRadius.circular(10), // 버튼 모서리 둥글게
+                  ),
+                  backgroundColor: Color(0xFFFF6E1D), // 버튼 색상
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -141,7 +179,13 @@ class _ProductDetailState extends State<ProductDetail> {
   // 이미지 슬라이더 빌드
   Widget _buildImageSlider() {
     return PageView.builder(
+      controller: _pageController, // 페이지를 제어하기 위한 컨트롤러
       itemCount: images.length, // 이미지 개수
+      onPageChanged: (index) {
+        setState(() {
+          _currentPage = index; // 현재 페이지 업데이트
+        });
+      },
       itemBuilder: (context, index) {
         return Image.network(
           images[index],
@@ -159,6 +203,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
