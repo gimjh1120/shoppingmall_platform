@@ -75,6 +75,16 @@ class _ProductDetailState extends State<ProductDetail> {
                 );
               },
             ),
+            //뒤로가기 버튼
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                CupertinoIcons.back,
+                color: Colors.black,
+              ),
+            ),
           ),
           SliverToBoxAdapter(
             child: Container(
