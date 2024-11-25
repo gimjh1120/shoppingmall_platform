@@ -27,6 +27,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
 
   Future<void> _pickImages() async {
     final List<XFile> selectedImages = await _picker.pickMultiImage(
@@ -65,10 +66,12 @@ class _ProductRegistrationState extends State<ProductRegistration> {
     final String name = _nameController.text;
     final int? price = int.tryParse(_priceController.text);
     final String description = _descriptionController.text;
+    final String location = _locationController.text;
 
     if (name.isEmpty ||
         price == null ||
         description.isEmpty ||
+        location.isEmpty ||
         _images.isEmpty) {
       _showErrorMessage('모든 필드를 채워주세요');
       return;
@@ -79,7 +82,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
       detail: description,
       price: price,
       images: _images,
-      location: '',
+      location: location,
     );
 
     widget.addProduct(newProduct);
@@ -97,6 +100,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
     _nameController.dispose();
     _priceController.dispose();
     _descriptionController.dispose();
+    _locationController.dispose();
     super.dispose();
   }
 
@@ -149,6 +153,8 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                 buildInputField(
                     '상품 설명', _descriptionController, '상세하게 상품을 설명해주세요',
                     maxLines: 6),
+                const SizedBox(height: 16),
+                buildInputField('위치', _locationController, '위치를 입력해주세요'),
               ],
             ),
           ],
