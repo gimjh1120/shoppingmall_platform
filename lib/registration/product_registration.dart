@@ -12,7 +12,6 @@ class ProductRegistration extends StatefulWidget {
 class _ProductRegistrationState extends State<ProductRegistration> {
   final ImagePicker _picker = ImagePicker();
   final List<XFile> _images = [];
-  
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
@@ -24,7 +23,6 @@ class _ProductRegistrationState extends State<ProductRegistration> {
       imageQuality: 80,
       limit: 10,
     );
-    
     if (selectedImages.isNotEmpty) {
       setState(() {
         for (var image in selectedImages) {
@@ -39,8 +37,15 @@ class _ProductRegistrationState extends State<ProductRegistration> {
 
   void _handleSubmit() {
     final String name = _nameController.text;
-    final String price = _priceController.text;
+    final int? price = int.tryParse(_priceController.text);
     final String description = _descriptionController.text;
+
+    if (price == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('올바른 가격을 입력해주세요')),
+      );
+      return;
+    }
 
     print('상품 이름: $name');
     print('가격: $price');
