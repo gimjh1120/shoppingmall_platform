@@ -1,6 +1,9 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../widgets/image_picker_button.dart';
+import '../widgets/image_container.dart';
+import '../widgets/delete_button.dart';
+import '../widgets/representative_photo_label.dart';
 
 class ProductRegistration extends StatefulWidget {
   const ProductRegistration({super.key});
@@ -57,16 +60,16 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   Widget _buildImagePickerButton() {
     return GestureDetector(
       onTap: _pickImages,
-      child: _ImagePickerButton(),
+      child: const ImagePickerButton(),
     );
   }
 
   Widget _buildImageItem(int index) {
     return Stack(
       children: [
-        _ImageContainer(image: _images[index]),
-        _DeleteButton(onTap: () => _removeImage(index)),
-        if (index == 0) const _RepresentativePhotoLabel(),
+        ImageContainer(image: _images[index]),
+        DeleteButton(onTap: () => _removeImage(index)),
+        if (index == 0) const RepresentativePhotoLabel(),
       ],
     );
   }
@@ -91,7 +94,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   }
 
   void _submitProduct(String name, int price, String description) {
-    // TODO: Implement actual product submission logic
+    // TODO: 데이터베이스에 상품 정보 저장
     print('상품 이름: $name');
     print('가격: $price');
     print('상품 설명: $description');
@@ -218,110 +221,6 @@ class _ProductRegistrationState extends State<ProductRegistration> {
               color: Colors.white,
               fontSize: 20,
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ImagePickerButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      margin: const EdgeInsets.only(right: 8),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.add_photo_alternate_outlined, size: 40),
-          const SizedBox(height: 8),
-          Text(
-            '사진은 최대 10장까지\n업로드 할 수 있습니다',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey[600],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ImageContainer extends StatelessWidget {
-  final XFile image;
-
-  const _ImageContainer({required this.image});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      margin: const EdgeInsets.only(right: 8),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Image.file(
-          File(image.path),
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
-  }
-}
-
-class _DeleteButton extends StatelessWidget {
-  final VoidCallback onTap;
-
-  const _DeleteButton({required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: 0,
-      right: 8,
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
-            shape: BoxShape.circle,
-          ),
-          child: const Icon(
-            Icons.close,
-            size: 18,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _RepresentativePhotoLabel extends StatelessWidget {
-  const _RepresentativePhotoLabel();
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 8,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        color: Colors.black.withOpacity(0.5),
-        child: const Text(
-          '대표사진',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 27,
           ),
         ),
       ),
