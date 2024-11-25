@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:shoppingmall_platform/detail/product_detail.dart';
 import 'package:shoppingmall_platform/models/product.dart'; // XFile을 사용하기 위한 import
 
