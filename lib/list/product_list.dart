@@ -1,86 +1,106 @@
 import 'package:flutter/material.dart';
 import 'package:shoppingmall_platform/list/widget/product_list_widget.dart';
+import 'package:shoppingmall_platform/models/product.dart';
+import 'package:shoppingmall_platform/registration/product_registration.dart'; // XFile을 사용하기 위한 import
 
-class ProductList extends StatelessWidget {
+class ProductList extends StatefulWidget {
+  const ProductList({super.key});
+
+  @override
+  _ProductListState createState() => _ProductListState();
+}
+
+class _ProductListState extends State<ProductList> {
+  final List<Product> products = [
+    // Product(
+    //   title: '아이폰13프로 128G 화이트 풀박 ‼카메라 무음‼️',
+    //   location: "서울시 강남구",
+    //   detail: '아이폰13프로 128G 화이트 풀박\n\n카메라 무음\n\n애플케어플러스 22년 10월까지',
+    //   price: 600000,
+    //   images: [XFile('assets/images/image_1.png')],
+    // ),
+    // 추가 상품들을 여기에 정의할 수 있습니다.
+  ];
+  
+  void addProduct(Product newProduct) {
+    setState(() {
+      products.add(newProduct);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // 전체 배경 흰색 설정
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight), // 이게 뭔지 잘 모르겠슴..
+        preferredSize: const Size.fromHeight(kToolbarHeight),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white, // 앱 바의 배경색 흰색
+            color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2), // 그림자 컬러
-                blurRadius: 12, // 블러 12
-                offset: Offset(0, 4), // 그림자 위치 x,y
+                color: Colors.grey.withOpacity(0.2),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
           child: AppBar(
-            title: Text(
+            title: const Text(
               'Banana',
               style: TextStyle(
                 color: Color(0xFFFF6E1D),
                 fontSize: 28,
                 fontFamily: 'Squada One',
                 fontWeight: FontWeight.w400,
-                letterSpacing: -0.56, // 자간
+                letterSpacing: -0.56,
               ),
             ),
-            backgroundColor: Colors.transparent, // 스크롤 했을때 그림자가 생기는거 같음
-            elevation: 0, // 기본 그림자 비활성화
+            backgroundColor: Colors.transparent,
+            elevation: 0,
           ),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20), //좌우 패딩 20
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView.separated(
-          padding: const EdgeInsets.only(top: 20), // 첫번째 위젯과 앱바 사이의 간격
-          itemCount: 10, // 일단 위젯 10개 복사
+          padding: const EdgeInsets.only(top: 20),
+          itemCount: products.length,
           itemBuilder: (context, index) {
-            return ProductListWidget();
+            return ProductListWidget(product: products[index]);
           },
-          separatorBuilder: (context, index) =>
-              SizedBox(height: 12), // 선이랑 위젯 사이 간격
+          separatorBuilder: (context, index) => const SizedBox(height: 12),
         ),
       ),
-
-      // 글쓰기 버튼
       floatingActionButton: Align(
-        alignment: Alignment.bottomRight, // 오른쪽 하단에 버튼 위치
+        alignment: Alignment.bottomRight,
         child: Padding(
-          padding: const EdgeInsets.only(
-            bottom: 12, // 하단에서 12 간격 띄움
-            right: 2, // 오른쪽에서 2 간격 띄움
-          ),
+          padding: const EdgeInsets.only(bottom: 12, right: 2),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProductRegistration(addProduct: addProduct),
+                ),
+              );
+            },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFFF6E1D),
+              backgroundColor: const Color(0xFFFF6E1D),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             ),
-            child: Row(
+            child: const Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.add,
-                  color: Colors.white, // Icon color
-                ),
-                const SizedBox(width: 4), // Spacing between icon and text
+                Icon(Icons.add, color: Colors.white),
+                SizedBox(width: 4),
                 Text(
                   '글쓰기',
-                  style: TextStyle(
-                    color: Colors.white, // Text color
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
                 ),
               ],
             ),
